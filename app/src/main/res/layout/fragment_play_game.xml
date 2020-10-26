@@ -17,13 +17,13 @@
             tools:src="@drawable/forkert0" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/hiddenWordTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/guessEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/type_a_letter"
@@ -31,7 +31,7 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/tryGuessButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/try_letter" />
