@@ -15,8 +15,12 @@ import android.widget.TextView;
 public class PlayGameFragment extends Fragment implements View.OnClickListener {
     ImageView progressImage;
     Button tryGuessButton;
-    TextView hiddenWord;
-    EditText guess;
+    TextView hiddenWordTextView;
+    EditText guessEditText;
+    HangmanLogic hangmanGame;
+
+    String hiddenWord;
+    String guess;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,8 +29,13 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
         progressImage.setImageResource(R.drawable.forkert0);
 
         tryGuessButton = root.findViewById(R.id.tryGuessButton);
-        hiddenWord = root.findViewById(R.id.hiddenWordTextView);
-        guess = root.findViewById(R.id.guessEditText);
+        hiddenWordTextView = root.findViewById(R.id.hiddenWordTextView);
+        guessEditText = root.findViewById(R.id.guessEditText);
+
+
+        hangmanGame = new HangmanLogic();
+        hiddenWord = hangmanGame.getWordProgress();
+        hiddenWordTextView.setText(hiddenWord);
 
         tryGuessButton.setOnClickListener(this);
         return root;
@@ -34,6 +43,8 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        guess = guessEditText.getText().toString();
 
+        hangmanGame.guessLetter(guess);
     }
 }

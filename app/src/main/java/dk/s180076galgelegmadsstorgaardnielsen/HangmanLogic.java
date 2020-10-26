@@ -10,6 +10,7 @@ public class HangmanLogic {
     private boolean isWon, isLost = false;
     private boolean correctGuess;
     private int wrongGuesses;
+    private String wordProgress;
 
     public HangmanLogic() {
         wordList.add("bil");
@@ -58,7 +59,7 @@ public class HangmanLogic {
         isLost = false;
         isWon = false;
         correctWord = wordList.get(new Random().nextInt(wordList.size()));
-        getWordProgress();
+        updateWordProgress();
     }
 
     public void guessLetter(String letter) {
@@ -81,6 +82,20 @@ public class HangmanLogic {
                 isLost = true;
             }
         }
-        getWordProgress();
+        updateWordProgress();
+    }
+
+    public void updateWordProgress() {
+        wordProgress = "";
+        isWon = true;
+        for (int n = 0; n < correctWord.length(); n++) {
+            String bogstav = correctWord.substring(n, n + 1);
+            if (usedLetters.contains(bogstav)) {
+                wordProgress = wordProgress + bogstav;
+            } else {
+                wordProgress = wordProgress + "*";
+                isLost = false;
+            }
+        }
     }
 }
