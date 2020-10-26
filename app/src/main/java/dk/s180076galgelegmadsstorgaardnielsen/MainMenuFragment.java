@@ -14,6 +14,7 @@ import android.widget.ImageView;
 public class MainMenuFragment extends Fragment implements View.OnClickListener {
     Button playGameButton, highscoreButton, helpButton;
     ImageView imageView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_menu, container, false);
@@ -33,6 +34,40 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if (v == playGameButton) {
+            setFragment(v);
+        }
+        if (v == highscoreButton) {
+            setFragment(v);
+        }
+        if (v == helpButton) {
+            setFragment(v);
+        }
+    }
 
+    public void setFragment(View v) {
+        Fragment fragment;
+
+        if (v == playGameButton) {
+            fragment = new PlayGameFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainActivityFrameLayout, fragment)
+                    .commit();
+        }
+        if (v == highscoreButton) {
+            fragment = new HighscoreFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainActivityFrameLayout, fragment)
+                    .commit();
+        }
+        if (v == helpButton) {
+            fragment = new HelpMenuFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainActivityFrameLayout, fragment)
+                    .commit();
+        }
     }
 }

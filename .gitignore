@@ -46,3 +46,10 @@ output.json
 
 #NDK
 obj/
+.gitignore
+.idea/codeStyles/
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
