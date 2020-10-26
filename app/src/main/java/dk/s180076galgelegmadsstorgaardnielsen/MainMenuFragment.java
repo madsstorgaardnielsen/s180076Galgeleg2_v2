@@ -19,7 +19,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main_menu, container, false);
         imageView = root.findViewById(R.id.imageView);
-        imageView.setImageResource(R.drawable.forkert6);
+        imageView.setImageResource(R.drawable.logo);
 
         playGameButton = root.findViewById(R.id.playGameButton);
         highscoreButton = root.findViewById(R.id.highscoreButton);

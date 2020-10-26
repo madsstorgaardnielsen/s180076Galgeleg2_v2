@@ -25,7 +25,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="208dp"
-            tools:src="@drawable/forkert6" />
+            tools:src="@drawable/logo" />
 
         <Button
             android:id="@+id/playGameButton"

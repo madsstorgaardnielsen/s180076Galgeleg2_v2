@@ -9,4 +9,6 @@
     <string name="how_to_win">How to win</string>
     <string name="help_menu">Help menu</string>
     <string name="play_hangman">Play hangman</string>
+    <string name="type_a_letter">Type a letter</string>
+    <string name="try_letter">Try letter!</string>
 </resources>
