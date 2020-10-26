@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">s180076GalgelegMadsStorgaardNielsen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="play_game">Play game</string>
+    <string name="highscores">Highscores</string>
+    <string name="help">Help</string>
+</resources>
