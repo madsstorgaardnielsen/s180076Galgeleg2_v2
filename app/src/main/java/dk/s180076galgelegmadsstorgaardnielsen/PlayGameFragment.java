@@ -39,7 +39,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
         hangmanGame = new HangmanLogic();
         hiddenWord = hangmanGame.getWordProgress();
-        hiddenWordTextView.setText("Ordet: "+hiddenWord);
+        hiddenWordTextView.setText("Ordet: " + hiddenWord);
         numberOfGuessesTextView.setText("0 ud af 7 forkerte gæt brugt.");
         usedLettersTextView.setText("Ingen gæt foretaget endnu.");
 
@@ -49,20 +49,20 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int amountWrongGuess = 0;
-        String wrongGuessProgresMsg;
+        int amountWrongGuess;
+        String wrongGuessProgressMsg;
 
         guess = guessEditText.getText().toString();
         hangmanGame.guessLetter(guess);
-        usedLettersTextView.setText("Du har brugt følgende bogstaver: "+ hangmanGame.getUsedLetters().toString());
+        usedLettersTextView.setText("Du har brugt følgende bogstaver: " + hangmanGame.getUsedLetters().toString());
 
         if (hangmanGame.isCorrectGuess()) {
             hiddenWord = hangmanGame.getWordProgress();
             hiddenWordTextView.setText(hiddenWord);
         } else {
             amountWrongGuess = hangmanGame.getWrongGuesses();
-            wrongGuessProgresMsg = amountWrongGuess+" ud af 7 forkerte gæt brugt.";
-            numberOfGuessesTextView.setText(wrongGuessProgresMsg);
+            wrongGuessProgressMsg = amountWrongGuess + " ud af 7 forkerte gæt brugt.";
+            numberOfGuessesTextView.setText(wrongGuessProgressMsg);
             updateImage(amountWrongGuess);
         }
         isGameOver();
@@ -72,18 +72,19 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     public void isGameOver() {
         if (hangmanGame.isWon()) {
             gameOver = new WonGameFragment();
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.mainActivityFrameLayout, gameOver)
-                    .commit();
+            setFragment(gameOver);
         }
         if (hangmanGame.isLost()) {
             gameOver = new LostGameFragment();
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.mainActivityFrameLayout, gameOver)
-                    .commit();
+            setFragment(gameOver);
         }
+    }
+
+    public void setFragment(Fragment fragment) {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainActivityFrameLayout, gameOver)
+                .commit();
     }
 
     public void updateImage(int wrongGuesses) {
