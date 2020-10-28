@@ -3,6 +3,7 @@ package dk.s180076galgelegmadsstorgaardnielsen;
 import java.util.ArrayList;
 import java.util.Random;
 
+//TODO patterns (Observer, state og factory)
 public class HangmanLogic {
     ArrayList<String> wordList = new ArrayList<>();
     ArrayList<String> usedLetters = new ArrayList<>();
