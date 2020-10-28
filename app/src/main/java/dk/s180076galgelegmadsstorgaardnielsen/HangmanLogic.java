@@ -12,6 +12,7 @@ public class HangmanLogic {
     private int wrongGuesses;
     private String wordProgress;
 
+    //TODO hente ord fra nettet, feks. async task
     public HangmanLogic() {
         wordList.add("bil");
         newGame();
