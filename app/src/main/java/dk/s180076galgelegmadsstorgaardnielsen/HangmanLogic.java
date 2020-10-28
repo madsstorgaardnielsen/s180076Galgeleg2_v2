@@ -7,7 +7,7 @@ public class HangmanLogic {
     ArrayList<String> wordList = new ArrayList<>();
     ArrayList<String> usedLetters = new ArrayList<>();
     private String correctWord;
-    private boolean isWon, isLost = false;
+    private boolean isWon = false, isLost = false;
     private boolean correctGuess;
     private int wrongGuesses;
     private String wordProgress;
@@ -42,7 +42,7 @@ public class HangmanLogic {
     }
 
     public String getWordProgress() {
-        return null; //TODO find ud af hvordan kun de korrekte bogstaver kan returneres
+        return wordProgress;
     }
 
     public String getCorrectWord() {
@@ -59,12 +59,11 @@ public class HangmanLogic {
         isLost = false;
         isWon = false;
         correctWord = wordList.get(new Random().nextInt(wordList.size()));
-        updateWordProgress();
+        updateHiddenWordProgress();
     }
 
     public void guessLetter(String letter) {
-        if (correctWord.length() != 1) return;
-        System.out.println("Der gættes på bogstavet: " + letter);
+        if (letter.length() != 1) return;
         if (usedLetters.contains(letter)) return;
         if (isWon || isLost) return;
 
@@ -72,20 +71,17 @@ public class HangmanLogic {
 
         if (correctWord.contains(letter)) {
             correctGuess = true;
-            System.out.println("Bogstavet var korrekt: " + letter);
         } else {
-            // Vi gættede på et bogstav der ikke var i ordet.
             correctGuess = false;
-            System.out.println("Bogstavet var IKKE korrekt: " + letter);
             wrongGuesses = wrongGuesses + 1;
             if (wrongGuesses > 6) {
                 isLost = true;
             }
         }
-        updateWordProgress();
+        updateHiddenWordProgress();
     }
 
-    public void updateWordProgress() {
+    public void updateHiddenWordProgress() {
         wordProgress = "";
         isWon = true;
         for (int n = 0; n < correctWord.length(); n++) {
@@ -94,7 +90,7 @@ public class HangmanLogic {
                 wordProgress = wordProgress + bogstav;
             } else {
                 wordProgress = wordProgress + "*";
-                isLost = false;
+                isWon = false;
             }
         }
     }

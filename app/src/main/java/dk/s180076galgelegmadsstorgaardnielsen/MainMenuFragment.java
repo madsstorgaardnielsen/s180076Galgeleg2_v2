@@ -53,6 +53,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.mainActivityFrameLayout, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
         if (v == highscoreButton) {
@@ -60,6 +61,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.mainActivityFrameLayout, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
         if (v == helpButton) {
@@ -67,6 +69,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.mainActivityFrameLayout, fragment)
+                    .addToBackStack(null)
                     .commit();
         }
     }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenuFragment">
+    tools:context=".LostGameFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,29 +11,34 @@
         android:orientation="vertical">
 
         <ImageView
+            android:layout_marginTop="25dp"
+            android:id="@+id/loserImageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:id="@+id/loserMsgTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="208dp"
-            tools:src="@drawable/logo" />
+            android:textAlignment="center"
+            android:textSize="24sp"/>
 
-        <Button
-            android:id="@+id/playGameButton"
+        <TextView
+            android:id="@+id/loserStatTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/play_game" />
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
 
         <Button
-            android:id="@+id/highscoreButton"
+            android:layout_marginTop="25dp"
+            android:id="@+id/gotoMainMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/highscores" />
+            android:text="@string/g_til_menu" />
 
-        <Button
-            android:id="@+id/helpButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/help" />
     </LinearLayout>
 
 </FrameLayout>
