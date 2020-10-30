@@ -15,7 +15,7 @@ public class HangmanLogic {
 
     //TODO hente ord fra nettet, feks. async task
     public HangmanLogic() {
-        wordList.add("bil");
+        wordList.add("b");
         newGame();
     }
 

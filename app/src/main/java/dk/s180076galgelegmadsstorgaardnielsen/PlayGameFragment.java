@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class PlayGameFragment extends Fragment implements View.OnClickListener {
     ImageView progressImage;
     Button tryGuessButton;
@@ -19,9 +21,10 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     EditText guessEditText;
     HangmanLogic hangmanGame;
     Fragment gameOver;
-
+    int amountWrongGuess;
     String hiddenWord;
     String guess;
+    Gson gson = new Gson();
 
     //TODO arbejd videre på game logic
     @Override
@@ -49,7 +52,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int amountWrongGuess;
+
         String wrongGuessProgressMsg;
 
         guess = guessEditText.getText().toString();
@@ -69,9 +72,17 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
         guessEditText.setText("");
     }
 
+/*    public void saveScore() {
+        HighscoreManager highscore = new HighscoreManager(hangmanGame.getCorrectWord(), "Test", amountWrongGuess+"");
+        MainActivity ma = new MainActivity();
+        ma.saveScore(highscore);
+        //highscore.saveScore(getActivity(), highscore);
+    }*/
+
     public void isGameOver() {
         if (hangmanGame.isWon()) {
             gameOver = new WonGameFragment();
+            //saveScore();
             setFragment(gameOver);
         }
         if (hangmanGame.isLost()) {
