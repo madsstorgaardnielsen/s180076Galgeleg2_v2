@@ -1,13 +1,10 @@
 package dk.s180076galgelegmadsstorgaardnielsen.logic;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
+
+import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
+import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
 
 //TODO patterns (Observer, state og factory)
 public class HangmanLogic {
@@ -18,6 +15,7 @@ public class HangmanLogic {
     private boolean correctGuess;
     private int wrongGuesses;
     private String wordProgress;
+    //ArrayList<Observer> observers;
 
     private static HangmanLogic instance = new HangmanLogic();
 
@@ -29,6 +27,7 @@ public class HangmanLogic {
     //TODO hente ord fra nettet, feks. async task
     private HangmanLogic() {
         wordList.add("bil");
+        //observers = new ArrayList<>();
         newGame();
     }
 

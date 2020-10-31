@@ -23,6 +23,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
+import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
 import dk.s180076galgelegmadsstorgaardnielsen.logic.HangmanLogic;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
 import dk.s180076galgelegmadsstorgaardnielsen.logic.HighscoreManager;
@@ -42,10 +44,14 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     String HIGHSCOREKEY = "highscore";
     HighscoreManager hsManager;
     String playerName;
+    //ArrayList<Observer> observers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_play_game, container, false);
+
+        //observers = new ArrayList<>();
+
         progressImage = root.findViewById(R.id.imageView);
         progressImage.setImageResource(R.drawable.forkert0);
 
