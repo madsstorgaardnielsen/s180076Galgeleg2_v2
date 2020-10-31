@@ -1,15 +1,13 @@
-package dk.s180076galgelegmadsstorgaardnielsen;
+package dk.s180076galgelegmadsstorgaardnielsen.fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import dk.s180076galgelegmadsstorgaardnielsen.R;
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener {
     Button playGameButton, highscoreButton, helpButton;

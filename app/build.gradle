@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "dk.s180076galgelegmadsstorgaardnielsen"
-        minSdkVersion 18
+        minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"

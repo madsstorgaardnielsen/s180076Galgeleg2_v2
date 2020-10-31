@@ -1,4 +1,4 @@
-package dk.s180076galgelegmadsstorgaardnielsen;
+package dk.s180076galgelegmadsstorgaardnielsen.fragments;
 
 import android.os.Bundle;
 
@@ -11,12 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import dk.s180076galgelegmadsstorgaardnielsen.R;
+import dk.s180076galgelegmadsstorgaardnielsen.logic.HangmanLogic;
+
 public class WonGameFragment extends Fragment implements View.OnClickListener {
     ImageView imageView;
     TextView winnerMsg;
     TextView winStats;
     Button goToMenu;
     MainMenuFragment mainMenuFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_won_game, container, false);
@@ -26,8 +30,10 @@ public class WonGameFragment extends Fragment implements View.OnClickListener {
         goToMenu = root.findViewById(R.id.gotoMainMenu);
 
         imageView.setImageResource(R.drawable.won);
+
+        HangmanLogic hangmanLogic = HangmanLogic.getInstance();
         winnerMsg.setText("DU VANDT!");
-        winStats.setText("ANTAL FORSØG"); //TODO overfør data eller kald hangmanlogic (lav den evt til singleton)
+        winStats.setText("ANTAL FORSØG: " + hangmanLogic.getWrongGuesses()); //TODO overfør data eller kald hangmanlogic (lav den evt til singleton)
 
         goToMenu.setOnClickListener(this);
         return root;

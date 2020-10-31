@@ -1,9 +1,14 @@
-package dk.s180076galgelegmadsstorgaardnielsen;
+package dk.s180076galgelegmadsstorgaardnielsen.fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import dk.s180076galgelegmadsstorgaardnielsen.logic.HangmanLogic;
+import dk.s180076galgelegmadsstorgaardnielsen.R;
+import dk.s180076galgelegmadsstorgaardnielsen.logic.HighscoreManager;
 
 public class PlayGameFragment extends Fragment implements View.OnClickListener {
     ImageView progressImage;
@@ -24,7 +37,11 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     int amountWrongGuess;
     String hiddenWord;
     String guess;
-    Gson gson = new Gson();
+    ArrayList<HighscoreManager> highscoreList = new ArrayList<>();
+    String SHAREDPREFKEY = "highscores";
+    String HIGHSCOREKEY = "highscore";
+    HighscoreManager hsManager;
+    String playerName;
 
     //TODO arbejd videre på game logic
     @Override
@@ -39,8 +56,9 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
         usedLettersTextView = root.findViewById(R.id.usedLettersTextView);
         numberOfGuessesTextView = root.findViewById(R.id.numberOfGuessesTextView);
 
+        getName();
 
-        hangmanGame = new HangmanLogic();
+        hangmanGame = HangmanLogic.getInstance();
         hiddenWord = hangmanGame.getWordProgress();
         hiddenWordTextView.setText("Ordet: " + hiddenWord);
         numberOfGuessesTextView.setText("0 ud af 7 forkerte gæt brugt.");
@@ -52,7 +70,6 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         String wrongGuessProgressMsg;
 
         guess = guessEditText.getText().toString();
@@ -72,17 +89,58 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
         guessEditText.setText("");
     }
 
-/*    public void saveScore() {
-        HighscoreManager highscore = new HighscoreManager(hangmanGame.getCorrectWord(), "Test", amountWrongGuess+"");
-        MainActivity ma = new MainActivity();
-        ma.saveScore(highscore);
-        //highscore.saveScore(getActivity(), highscore);
-    }*/
+    public void saveScore() {
+        loadData();
+        hsManager = new HighscoreManager(hangmanGame.getCorrectWord(), playerName, hangmanGame.getWrongGuesses() + "");
+        highscoreList.add(hsManager);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHAREDPREFKEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(highscoreList);
+        editor.putString(HIGHSCOREKEY, json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHAREDPREFKEY, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(HIGHSCOREKEY, null);
+        Type type = new TypeToken<ArrayList<HighscoreManager>>() {
+        }.getType();
+        highscoreList = gson.fromJson(json, type);
+
+        if (highscoreList == null) {
+            highscoreList = new ArrayList<>();
+        }
+    }
+
+    public void getName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Indtast navn");
+        final EditText input = new EditText(getActivity());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                playerName = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                playerName = "Not named";
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
 
     public void isGameOver() {
         if (hangmanGame.isWon()) {
             gameOver = new WonGameFragment();
-            //saveScore();
+            saveScore();
             setFragment(gameOver);
         }
         if (hangmanGame.isLost()) {
@@ -94,7 +152,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     public void setFragment(Fragment fragment) {
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.mainActivityFrameLayout, gameOver)
+                .replace(R.id.mainActivityFrameLayout, fragment)
                 .commit();
     }
 
