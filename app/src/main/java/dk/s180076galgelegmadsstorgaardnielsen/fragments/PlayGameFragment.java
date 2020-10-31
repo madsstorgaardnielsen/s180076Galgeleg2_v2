@@ -43,7 +43,6 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     HighscoreManager hsManager;
     String playerName;
 
-    //TODO arbejd videre på game logic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_play_game, container, false);

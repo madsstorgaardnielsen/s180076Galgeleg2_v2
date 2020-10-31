@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
 
-
+//TODO indhold
 public class HelpMenuFragment extends Fragment {
 
     @Override

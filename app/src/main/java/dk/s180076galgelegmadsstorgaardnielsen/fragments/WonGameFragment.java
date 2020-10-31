@@ -33,7 +33,7 @@ public class WonGameFragment extends Fragment implements View.OnClickListener {
 
         HangmanLogic hangmanLogic = HangmanLogic.getInstance();
         winnerMsg.setText("DU VANDT!");
-        winStats.setText("ANTAL FORSØG: " + hangmanLogic.getWrongGuesses()); //TODO overfør data eller kald hangmanlogic (lav den evt til singleton)
+        winStats.setText("ANTAL FORSØG: " + hangmanLogic.getWrongGuesses());
 
         goToMenu.setOnClickListener(this);
         return root;
