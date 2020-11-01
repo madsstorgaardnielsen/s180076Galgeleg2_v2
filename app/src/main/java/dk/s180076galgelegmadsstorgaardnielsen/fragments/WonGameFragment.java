@@ -14,7 +14,6 @@ import android.widget.TextView;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
 import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
 import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
-import dk.s180076galgelegmadsstorgaardnielsen.LogicDataGrabber;
 
 public class WonGameFragment extends Fragment implements View.OnClickListener, Observer {
     ImageView imageView;
@@ -24,8 +23,6 @@ public class WonGameFragment extends Fragment implements View.OnClickListener, O
     MainMenuFragment mainMenuFragment;
     int wrongGuesses;
     String playerName;
-
-    LogicDataGrabber logicDataGrabber;
 
     public WonGameFragment(Subject LogicDataGrabber) {
         LogicDataGrabber.register(this);
@@ -37,7 +34,6 @@ public class WonGameFragment extends Fragment implements View.OnClickListener, O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_won_game, container, false);
-        //logicDataGrabber = new LogicDataGrabber();
 
         imageView = root.findViewById(R.id.winnerImageView);
         winnerMsg = root.findViewById(R.id.winnerMsgTextView);

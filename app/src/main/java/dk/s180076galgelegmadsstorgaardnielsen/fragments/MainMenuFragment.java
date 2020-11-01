@@ -45,7 +45,6 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
 
     public void setFragment(View v) {
         Fragment fragment;
-
         if (v == playGameButton) {
             fragment = new PlayGameFragment();
             getFragmentManager()

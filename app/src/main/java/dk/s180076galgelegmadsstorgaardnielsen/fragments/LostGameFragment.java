@@ -18,12 +18,11 @@ public class LostGameFragment extends Fragment implements View.OnClickListener, 
     Button goToMenu;
     MainMenuFragment mainMenuFragment;
     String correctWord;
-    private boolean isWon;
     private boolean isLost;
+    private boolean isWon;
     private String guess;
     private int wrongGuesses;
-    //private String correctWord;
-    private String playername;
+    private String playerName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,20 +50,20 @@ public class LostGameFragment extends Fragment implements View.OnClickListener, 
                 .commit();
     }
 
-
     @Override
     public void update(boolean isWon, boolean isLost, String guess, int wrongGuesses, String correctWord, String playerName) {
-        this.isLost = isWon;
+        this.isWon = isWon;
         this.isLost = isLost;
         this.guess = guess;
         this.wrongGuesses = wrongGuesses;
         this.correctWord = correctWord;
+        this.playerName = playerName;
         printUpdate();
     }
 
     public void printUpdate() {
         System.out.println("\n" +
-                "Player name: " + playername +"\n" +
+                "Player name: " + playerName +"\n" +
                 "isWon: " + isWon + "\n" +
                 "isLost: " + isLost + "\n" +
                 "Guess: " + guess + "\n" +

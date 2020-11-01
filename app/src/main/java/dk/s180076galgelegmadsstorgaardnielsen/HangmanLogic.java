@@ -1,12 +1,8 @@
 package dk.s180076galgelegmadsstorgaardnielsen;
 
-import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.Random;
 
-import dk.s180076galgelegmadsstorgaardnielsen.fragments.LostGameFragment;
-import dk.s180076galgelegmadsstorgaardnielsen.fragments.WonGameFragment;
 import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
 import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
 
@@ -62,7 +58,6 @@ public class HangmanLogic implements Observer {
     public boolean isWon() {
         return isWon;
     }
-
 
     public boolean guessLetter(String letter) {
         if (correctWord.contains(letter)) {
