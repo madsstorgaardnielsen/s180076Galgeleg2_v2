@@ -11,6 +11,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:layout_marginTop="20dp"
             android:id="@+id/imageView"
             android:layout_width="263dp"
             android:layout_height="200dp"
@@ -18,6 +19,7 @@
             tools:src="@drawable/forkert0" />
 
         <FrameLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
@@ -66,7 +68,8 @@
             android:layout_marginTop="20dp"
             android:contentDescription="@string/type_a_letter"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="1"/>
 
         <Button
             android:id="@+id/tryGuessButton"

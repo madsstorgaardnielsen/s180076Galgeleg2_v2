@@ -9,20 +9,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.logic.HangmanLogic;
+import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
 
-public class LostGameFragment extends Fragment implements View.OnClickListener {
+public class LostGameFragment extends Fragment implements View.OnClickListener, Observer {
     ImageView imageView;
     TextView loserMsg;
     TextView loserStats;
     Button goToMenu;
     MainMenuFragment mainMenuFragment;
-    HangmanLogic hangmanLogic = HangmanLogic.getInstance();
+    String correctWord;
+    private boolean isWon;
+    private boolean isLost;
+    private String guess;
+    private int wrongGuesses;
+    //private String correctWord;
+    private String playername;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_lost_game, container, false);
-        String correctWord = hangmanLogic.getCorrectWord();
 
         imageView = root.findViewById(R.id.loserImageView);
         loserMsg = root.findViewById(R.id.loserMsgTextView);
@@ -44,5 +49,26 @@ public class LostGameFragment extends Fragment implements View.OnClickListener {
                 .beginTransaction()
                 .replace(R.id.mainActivityFrameLayout, mainMenuFragment)
                 .commit();
+    }
+
+
+    @Override
+    public void update(boolean isWon, boolean isLost, String guess, int wrongGuesses, String correctWord, String playerName) {
+        this.isLost = isWon;
+        this.isLost = isLost;
+        this.guess = guess;
+        this.wrongGuesses = wrongGuesses;
+        this.correctWord = correctWord;
+        printUpdate();
+    }
+
+    public void printUpdate() {
+        System.out.println("\n" +
+                "Player name: " + playername +"\n" +
+                "isWon: " + isWon + "\n" +
+                "isLost: " + isLost + "\n" +
+                "Guess: " + guess + "\n" +
+                "Wrong Guesses: " + wrongGuesses + "\n" +
+                "Correct Word: " + correctWord);
     }
 }

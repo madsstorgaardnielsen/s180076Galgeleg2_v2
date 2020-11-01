@@ -1,9 +1,9 @@
 package dk.s180076galgelegmadsstorgaardnielsen.interfaces;
 
 public interface Subject {
-    void addObserver(Observer obs);
+    void register(Observer newObserver);
 
-    void deleteObserver(Observer obs);
+    void unregister(Observer deleteObserver);
 
     void notifyObservers();
 }

@@ -1,5 +1,5 @@
 package dk.s180076galgelegmadsstorgaardnielsen.interfaces;
 
 public interface Observer {
-    void update(String wordProgress, String correctWord, int wrongGuesses);
+    void update(boolean isWon, boolean isLost, String guess, int wrongGuesses, String correctWord, String playerName);
 }

@@ -23,34 +23,44 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
-import dk.s180076galgelegmadsstorgaardnielsen.logic.HangmanLogic;
+import dk.s180076galgelegmadsstorgaardnielsen.HangmanLogic;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.logic.HighscoreManager;
+import dk.s180076galgelegmadsstorgaardnielsen.HighscoreManager;
+import dk.s180076galgelegmadsstorgaardnielsen.LogicDataGrabber;
 
 public class PlayGameFragment extends Fragment implements View.OnClickListener {
     ImageView progressImage;
     Button tryGuessButton;
     TextView hiddenWordTextView, usedLettersTextView, numberOfGuessesTextView;
     EditText guessEditText;
-    HangmanLogic hangmanGame;
-    Fragment gameOver;
-    int amountWrongGuess;
-    String hiddenWord;
-    String guess;
     ArrayList<HighscoreManager> highscoreList = new ArrayList<>();
+    ArrayList<String> usedLetters = new ArrayList<>();
+    String guess;
     String SHAREDPREFKEY = "highscores";
     String HIGHSCOREKEY = "highscore";
-    HighscoreManager hsManager;
     String playerName;
-    //ArrayList<Observer> observers;
+    String wordProgress = "";
+    String correctWord;
+    HighscoreManager hsManager;
+    LogicDataGrabber logicDataGrabber;
+    WonGameFragment wonGameFragment;
+    HangmanLogic hangmanLogic;
+    Fragment gameOver;
+    int amountWrongGuess;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_play_game, container, false);
 
-        //observers = new ArrayList<>();
+        //Subject
+        logicDataGrabber = new LogicDataGrabber();
+
+        //Observers
+        hangmanLogic = new HangmanLogic(logicDataGrabber);
+        wonGameFragment = new WonGameFragment(logicDataGrabber);
+
+        correctWord = hangmanLogic.getCorrectWord();
+        logicDataGrabber.setCorrectWord(correctWord);
 
         progressImage = root.findViewById(R.id.imageView);
         progressImage.setImageResource(R.drawable.forkert0);
@@ -63,9 +73,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
         getName();
 
-        hangmanGame = HangmanLogic.getInstance();
-        hiddenWord = hangmanGame.getWordProgress();
-        hiddenWordTextView.setText("Ordet: " + hiddenWord);
+        hiddenWordTextView.setText("Ordet: " + hangmanLogic.getHiddenStr(correctWord.length()));
         numberOfGuessesTextView.setText("0 ud af 7 forkerte gæt brugt.");
         usedLettersTextView.setText("Ingen gæt foretaget endnu.");
 
@@ -76,27 +84,30 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         String wrongGuessProgressMsg;
-
         guess = guessEditText.getText().toString();
-        hangmanGame.guessLetter(guess);
-        usedLettersTextView.setText("Du har brugt følgende bogstaver: " + hangmanGame.getUsedLetters().toString());
 
-        if (hangmanGame.isCorrectGuess()) {
-            hiddenWord = hangmanGame.getWordProgress();
-            hiddenWordTextView.setText(hiddenWord);
+        logicDataGrabber.setPlayerName(playerName);
+        logicDataGrabber.setGuess(guess);
+
+        usedLetters.add(guess);
+
+        if (hangmanLogic.guessLetter(guess)) {
+            wordProgress = hangmanLogic.updateHiddenWordProgress(usedLetters);
+            hiddenWordTextView.setText(wordProgress);
         } else {
-            amountWrongGuess = hangmanGame.getWrongGuesses();
+            amountWrongGuess = hangmanLogic.getAmountWrongGuess();
             wrongGuessProgressMsg = amountWrongGuess + " ud af 7 forkerte gæt brugt.";
             numberOfGuessesTextView.setText(wrongGuessProgressMsg);
             updateImage(amountWrongGuess);
         }
-        isGameOver();
+        usedLettersTextView.setText("Du har brugt følgende bogstaver: " + usedLetters.toString());
         guessEditText.setText("");
+        isGameOver();
     }
 
     public void saveScore() {
         loadData();
-        hsManager = new HighscoreManager(hangmanGame.getCorrectWord(), playerName, hangmanGame.getWrongGuesses() + "");
+        hsManager = new HighscoreManager(correctWord, playerName, hangmanLogic.getAmountWrongGuess() + "");
         highscoreList.add(hsManager);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHAREDPREFKEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -138,17 +149,15 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
                 dialog.cancel();
             }
         });
-
         builder.show();
     }
 
     public void isGameOver() {
-        if (hangmanGame.isWon()) {
+        if (hangmanLogic.isWon()) {
             gameOver = new WonGameFragment();
             saveScore();
             setFragment(gameOver);
-        }
-        if (hangmanGame.isLost()) {
+        } else if (hangmanLogic.isLost()) {
             gameOver = new LostGameFragment();
             setFragment(gameOver);
         }

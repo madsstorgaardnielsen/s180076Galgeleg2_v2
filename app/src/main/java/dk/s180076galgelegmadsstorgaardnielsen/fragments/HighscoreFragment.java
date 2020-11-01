@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.logic.HighscoreManager;
+import dk.s180076galgelegmadsstorgaardnielsen.HighscoreManager;
 
 
 public class HighscoreFragment extends Fragment {

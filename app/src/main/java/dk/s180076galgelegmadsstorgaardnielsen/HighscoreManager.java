@@ -1,4 +1,4 @@
-package dk.s180076galgelegmadsstorgaardnielsen.logic;
+package dk.s180076galgelegmadsstorgaardnielsen;
 
 public class HighscoreManager {
     String secretWord;
