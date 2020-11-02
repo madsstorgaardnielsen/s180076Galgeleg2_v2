@@ -115,6 +115,7 @@ public class GameActivity extends AppCompatActivity implements Observer, View.On
         }
     }
 
+    //TODO Fix skift af fragmenter
     public void setFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()

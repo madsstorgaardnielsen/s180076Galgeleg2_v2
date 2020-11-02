@@ -37,6 +37,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         helpButton.setOnClickListener(this);
     }
 
+    //TODO lav settings knap samt logik til den
     @Override
     public void onClick(View v) {
         if (v == playGameButton) {
@@ -50,6 +51,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    //TODO Fix skift af fragmenter
     public void setFragment(View v) {
         if (v == highscoreButton) {
             fragment = new HighscoreFragment();
