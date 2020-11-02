@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/WonGameFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.WonGameFragment">
+    tools:context=".playgame.fragments.WonGameFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,10 +12,10 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="25dp"
             android:id="@+id/winnerImageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:layout_marginTop="25dp" />
 
         <TextView
             android:id="@+id/winnerMsgTextView"
@@ -33,12 +34,10 @@
             android:textSize="24sp" />
 
         <Button
-            android:layout_marginTop="25dp"
             android:id="@+id/gotoMainMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:text="@string/g_til_menu" />
     </LinearLayout>
-
-
 </FrameLayout>

@@ -1,3 +1,4 @@
+/*
 package dk.s180076galgelegmadsstorgaardnielsen.fragments;
 
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
+import dk.s180076galgelegmadsstorgaardnielsen.menu.help.HelpFragment;
+import dk.s180076galgelegmadsstorgaardnielsen.menu.highscore.HighscoreFragment;
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener {
     Button playGameButton, highscoreButton, helpButton;
@@ -62,7 +65,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
                     .commit();
         }
         if (v == helpButton) {
-            fragment = new HelpMenuFragment();
+            fragment = new HelpFragment();
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.mainActivityFrameLayout, fragment)
@@ -70,4 +73,4 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener {
                     .commit();
         }
     }
-}
+}*/

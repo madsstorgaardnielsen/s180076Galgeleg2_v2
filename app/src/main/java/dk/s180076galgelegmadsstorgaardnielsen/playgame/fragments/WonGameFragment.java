@@ -1,5 +1,6 @@
-package dk.s180076galgelegmadsstorgaardnielsen.fragments;
+package dk.s180076galgelegmadsstorgaardnielsen.playgame.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,20 +13,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
+import dk.s180076galgelegmadsstorgaardnielsen.menu.MainMenuActivity;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.game.GameModel;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Observer;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Subject;
 
 public class WonGameFragment extends Fragment implements View.OnClickListener, Observer {
     ImageView imageView;
     TextView winnerMsg;
     TextView winStats;
     Button goToMenu;
-    MainMenuFragment mainMenuFragment;
     int wrongGuesses;
     String playerName;
 
-    public WonGameFragment(Subject LogicDataGrabber) {
-        LogicDataGrabber.register(this);
+
+    public WonGameFragment(Subject GameModel) {
+        GameModel.register(this);
     }
 
     public WonGameFragment( ) {
@@ -34,6 +37,9 @@ public class WonGameFragment extends Fragment implements View.OnClickListener, O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_won_game, container, false);
+
+        playerName = GameModel.getInstance().getPlayerName();
+        wrongGuesses = GameModel.getInstance().getAmountWrongGuess();
 
         imageView = root.findViewById(R.id.winnerImageView);
         winnerMsg = root.findViewById(R.id.winnerMsgTextView);
@@ -45,17 +51,15 @@ public class WonGameFragment extends Fragment implements View.OnClickListener, O
         winnerMsg.setText("DU VANDT "+playerName+"!");
         winStats.setText("ANTAL FORSØG: " + wrongGuesses);
 
+        GameModel.getInstance().resetVariables();
         goToMenu.setOnClickListener(this);
         return root;
     }
 
     @Override
     public void onClick(View v) {
-        mainMenuFragment = new MainMenuFragment();
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainActivityFrameLayout, mainMenuFragment)
-                .commit();
+        Intent myIntent = new Intent(getActivity(), MainMenuActivity.class);
+        startActivity(myIntent);
     }
 
     @Override

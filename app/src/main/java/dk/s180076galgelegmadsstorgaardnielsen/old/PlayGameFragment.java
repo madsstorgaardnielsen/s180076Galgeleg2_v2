@@ -1,3 +1,4 @@
+/*
 package dk.s180076galgelegmadsstorgaardnielsen.fragments;
 
 import android.app.AlertDialog;
@@ -25,15 +26,17 @@ import java.util.ArrayList;
 
 import dk.s180076galgelegmadsstorgaardnielsen.HangmanLogic;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.HighscoreManager;
+import dk.s180076galgelegmadsstorgaardnielsen.menu.highscore.HighscoreModel;
 import dk.s180076galgelegmadsstorgaardnielsen.LogicDataGrabber;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.fragments.LostGameFragment;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.fragments.WonGameFragment;
 
 public class PlayGameFragment extends Fragment implements View.OnClickListener {
     ImageView progressImage;
     Button tryGuessButton;
     TextView hiddenWordTextView, usedLettersTextView, numberOfGuessesTextView;
     EditText guessEditText;
-    ArrayList<HighscoreManager> highscoreList = new ArrayList<>();
+    ArrayList<HighscoreModel> highscoreList = new ArrayList<>();
     ArrayList<String> usedLetters = new ArrayList<>();
     String guess;
     String SHAREDPREFKEY = "highscores";
@@ -41,7 +44,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
     String playerName;
     String wordProgress = "";
     String correctWord;
-    HighscoreManager hsManager;
+    HighscoreModel hsManager;
     LogicDataGrabber logicDataGrabber;
     WonGameFragment wonGameFragment;
     HangmanLogic hangmanLogic;
@@ -107,7 +110,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
 
     public void saveScore() {
         loadData();
-        hsManager = new HighscoreManager(correctWord, playerName, hangmanLogic.getAmountWrongGuess() + "");
+        hsManager = new HighscoreModel(correctWord, playerName, hangmanLogic.getAmountWrongGuess() + "");
         highscoreList.add(hsManager);
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHAREDPREFKEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -121,7 +124,7 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHAREDPREFKEY, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(HIGHSCOREKEY, null);
-        Type type = new TypeToken<ArrayList<HighscoreManager>>() {
+        Type type = new TypeToken<ArrayList<HighscoreModel>>() {
         }.getType();
         highscoreList = gson.fromJson(json, type);
 
@@ -195,4 +198,4 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-}
+}*/

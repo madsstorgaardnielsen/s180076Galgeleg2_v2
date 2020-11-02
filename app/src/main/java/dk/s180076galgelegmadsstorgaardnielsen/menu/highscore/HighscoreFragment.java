@@ -1,4 +1,4 @@
-package dk.s180076galgelegmadsstorgaardnielsen.fragments;
+package dk.s180076galgelegmadsstorgaardnielsen.menu.highscore;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.HighscoreManager;
+import dk.s180076galgelegmadsstorgaardnielsen.menu.highscore.HighscoreModel;
 
 
 public class HighscoreFragment extends Fragment {
     ListView listView;
-    ArrayList<HighscoreManager> highscoreList;
+    ArrayList<HighscoreModel> highscoreList;
     String SHAREDPREFKEY = "highscores";
     String HIGHSCOREKEY = "highscore";
 
@@ -40,7 +40,7 @@ public class HighscoreFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHAREDPREFKEY, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(HIGHSCOREKEY, null);
-        Type type = new TypeToken<ArrayList<HighscoreManager>>() {
+        Type type = new TypeToken<ArrayList<HighscoreModel>>() {
         }.getType();
         highscoreList = gson.fromJson(json, type);
 
@@ -51,9 +51,9 @@ public class HighscoreFragment extends Fragment {
 
     private void sortHighscores() {
         loadData();
-        Collections.sort(highscoreList, new Comparator<HighscoreManager>() {
+        Collections.sort(highscoreList, new Comparator<HighscoreModel>() {
             @Override
-            public int compare(HighscoreManager hs1, HighscoreManager hs2) {
+            public int compare(HighscoreModel hs1, HighscoreModel hs2) {
                 return Integer.compare(Integer.parseInt(hs1.getGuesses()), Integer.parseInt(hs2.getGuesses()));
             }
         });

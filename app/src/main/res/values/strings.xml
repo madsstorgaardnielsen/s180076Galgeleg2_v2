@@ -13,4 +13,13 @@
     <string name="try_letter">Try letter!</string>
     <string name="g_t">gæt!</string>
     <string name="g_til_menu">Gå til menu</string>
+    <string name="title_activity_play_game">PlayGameActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="nem">Nem</string>
+    <string name="mellem">Mellem</string>
+    <string name="sv_r">Svær</string>
 </resources>

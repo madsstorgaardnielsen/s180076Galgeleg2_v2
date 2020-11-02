@@ -1,6 +1,6 @@
-package dk.s180076galgelegmadsstorgaardnielsen;
+package dk.s180076galgelegmadsstorgaardnielsen.menu.highscore;
 
-public class HighscoreManager {
+public class HighscoreModel {
     String secretWord;
     String playerName;
     String guesses;
@@ -9,10 +9,17 @@ public class HighscoreManager {
         return guesses;
     }
 
-    public HighscoreManager(String secretWord, String playerName, String guesses) {
+    public HighscoreModel(String secretWord, String playerName, String guesses) {
         this.secretWord = secretWord;
         this.playerName = playerName;
         this.guesses = guesses;
+    }
+
+    public HighscoreModel() {
+    }
+
+    public HighscoreModel addHighscore(HighscoreModel highscoreModel) {
+        return new HighscoreModel();
     }
 
     public String toString() {

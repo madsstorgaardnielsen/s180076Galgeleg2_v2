@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FLPlayGame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PlayGameFragment">
+    tools:context=".playgame.game.GameActivity"
+    tools:deviceIds="wear">
+
 
     <LinearLayout
+        android:id="@+id/LL1PlayGame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginTop="20dp"
             android:id="@+id/imageView"
             android:layout_width="263dp"
             android:layout_height="200dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             tools:src="@drawable/forkert0" />
 
         <FrameLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/usedLettersTextView"
@@ -34,10 +39,11 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    android:layout_marginTop="25dp"
                     android:id="@+id/numberOfGuessesTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="25dp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -48,6 +54,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/LL2PlayGame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -67,9 +74,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:contentDescription="@string/type_a_letter"
+            android:digits="abcdefghijklmnopqrstuvwxyzæøå"
             android:ems="10"
+            android:hint="Skriv her!"
             android:inputType="textPersonName"
-            android:maxLength="1"/>
+            android:maxLength="1"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/tryGuessButton"

@@ -1,5 +1,6 @@
-package dk.s180076galgelegmadsstorgaardnielsen.fragments;
+package dk.s180076galgelegmadsstorgaardnielsen.playgame.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,24 +10,33 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dk.s180076galgelegmadsstorgaardnielsen.R;
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
+import dk.s180076galgelegmadsstorgaardnielsen.menu.MainMenuActivity;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.game.GameModel;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Observer;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Subject;
 
 public class LostGameFragment extends Fragment implements View.OnClickListener, Observer {
     ImageView imageView;
     TextView loserMsg;
     TextView loserStats;
     Button goToMenu;
-    MainMenuFragment mainMenuFragment;
     String correctWord;
-    private boolean isLost;
-    private boolean isWon;
-    private String guess;
-    private int wrongGuesses;
-    private String playerName;
+     int wrongGuesses;
+     String playerName;
+
+    public LostGameFragment(Subject GameModel) {
+        GameModel.register(this);
+    }
+
+    public LostGameFragment( ) {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_lost_game, container, false);
+
+        playerName = GameModel.getInstance().getPlayerName();
+        correctWord = GameModel.getInstance().getCorrectWord();
 
         imageView = root.findViewById(R.id.loserImageView);
         loserMsg = root.findViewById(R.id.loserMsgTextView);
@@ -34,40 +44,24 @@ public class LostGameFragment extends Fragment implements View.OnClickListener, 
         goToMenu = root.findViewById(R.id.gotoMainMenu);
 
         imageView.setImageResource(R.drawable.lost);
-        loserMsg.setText("DU TABTE!");
+        loserMsg.setText(playerName+ " DU TABTE!");
         loserStats.setText("Ordet var: " + correctWord);
 
+        GameModel.getInstance().resetVariables();
         goToMenu.setOnClickListener(this);
         return root;
     }
 
     @Override
     public void onClick(View v) {
-        mainMenuFragment = new MainMenuFragment();
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainActivityFrameLayout, mainMenuFragment)
-                .commit();
+        Intent myIntent = new Intent(getActivity(), MainMenuActivity.class);
+        startActivity(myIntent);
     }
 
     @Override
     public void update(boolean isWon, boolean isLost, String guess, int wrongGuesses, String correctWord, String playerName) {
-        this.isWon = isWon;
-        this.isLost = isLost;
-        this.guess = guess;
         this.wrongGuesses = wrongGuesses;
         this.correctWord = correctWord;
         this.playerName = playerName;
-        printUpdate();
-    }
-
-    public void printUpdate() {
-        System.out.println("\n" +
-                "Player name: " + playerName +"\n" +
-                "isWon: " + isWon + "\n" +
-                "isLost: " + isLost + "\n" +
-                "Guess: " + guess + "\n" +
-                "Wrong Guesses: " + wrongGuesses + "\n" +
-                "Correct Word: " + correctWord);
     }
 }

@@ -1,10 +1,11 @@
+/*
 package dk.s180076galgelegmadsstorgaardnielsen;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Subject;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Observer;
 
 //TODO patterns (Observer, state og factory)
 public class HangmanLogic implements Observer {
@@ -107,3 +108,4 @@ public class HangmanLogic implements Observer {
                 "Correct Word: " + correctWord);
     }
 }
+*/

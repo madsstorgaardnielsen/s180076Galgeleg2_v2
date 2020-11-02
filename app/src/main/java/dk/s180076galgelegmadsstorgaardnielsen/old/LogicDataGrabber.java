@@ -1,9 +1,10 @@
+/*
 package dk.s180076galgelegmadsstorgaardnielsen;
 
 import java.util.ArrayList;
 
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Observer;
-import dk.s180076galgelegmadsstorgaardnielsen.interfaces.Subject;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Observer;
+import dk.s180076galgelegmadsstorgaardnielsen.playgame.interfaces.Subject;
 
 public class LogicDataGrabber implements Subject {
     private boolean isWon;
@@ -60,3 +61,4 @@ public class LogicDataGrabber implements Subject {
         notifyObservers();
     }
 }
+*/
